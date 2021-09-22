@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 
 class Location(models.Model):
     name = models.CharField(max_length=200)
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, null=True, blank="")
 
     def __str__(self):
         return self.name
@@ -12,7 +12,7 @@ class Location(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=200)
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, null=True, blank="")
 
     def __str__(self):
         return self.name
@@ -23,10 +23,11 @@ class Album(models.Model):
     author = models.ForeignKey(
         get_user_model(), on_delete=models.CASCADE, related_name="author"
     )
-    description = models.CharField(max_length=400)
-    pub_date = models.DateTimeField("date published")
-    blog = (
-        models.TextField()
+    description = models.CharField(max_length=400, null=True, blank="")
+    pub_date = models.DateTimeField("date published", auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    blog = models.TextField(
+        null=True, blank=""
     )  # TODO 22Sept  Change this to use tinyMCE or similar......
     # All fields to add in the future
     # TODO 22Sept add a 'last edit date' field
@@ -43,3 +44,15 @@ class Album(models.Model):
 
     def __str__(self):
         return self.title
+
+
+def upload_gallery_image(instance, filename):
+    return f"/media/{instance.pet.name}/gallery/{filename}"
+
+
+class Image(models.Model):
+    image = models.ImageField(upload_to=upload_gallery_image)
+    caption = models.CharField(max_length=400, null=True, blank="")
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name="images")
+    locations = models.ManyToManyField(Location)
+    # TODO -22Sept21 - add likes and comments...
