@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.forms import modelformset_factory
 from .models import Image
@@ -14,4 +15,16 @@ def add_album_view(request):
             request, "albums/index.html", {"album_form": album_form, "formset": formset}
         )
     elif request.method == "POST":
-        pass
+        album_form = AlbumForm(request.POST)
+        formset = ImageFormSet(request.POST, request.FILES)
+
+        if album_form.is_valid() and formset.is_valid():
+            album_obj = album_form.save()
+
+            for form in formset.cleaned_data:
+                if form:
+                    image = form["image"]
+                    Image.objects.create(image=image, album=album_obj)
+            return HttpResponseRedirect("")
+        else:
+            print(pet_form.errors, formset.errors)
