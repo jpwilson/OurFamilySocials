@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # Local
     "accounts",
     "pages",
+    "albums",
 ]
 
 MIDDLEWARE = [
@@ -183,3 +184,8 @@ DEFAULT_FROM_EMAIL = "supalist1@gmail.com"
 # TODO  add the links and styling for password change and reset (p139 of dfp)
 # TODO - (20Sept21) - rename albums app to pages -
 #                                       see this link: https://stackoverflow.com/questions/8408046/how-to-change-the-name-of-a-django-app
+
+
+# MEDIA - user uploaded...
+MEDIA_URL = "/media/"  # new
+MEDIA_ROOT = str(BASE_DIR.joinpath("media"))  # new
