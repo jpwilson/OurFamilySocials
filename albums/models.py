@@ -57,4 +57,6 @@ class Image(models.Model):
     caption = models.CharField(max_length=400, null=True, blank="")
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name="images")
     locations = models.ManyToManyField(Location, null=True, blank=True)
+    pub_date = models.DateTimeField("date published", auto_now_add=True)
+
     # TODO -22Sept21 - add likes and comments...
