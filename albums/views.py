@@ -27,4 +27,4 @@ def add_album_view(request):
                     Image.objects.create(image=image, album=album_obj)
             return HttpResponseRedirect("")
         else:
-            print(pet_form.errors, formset.errors)
+            print(album_form.errors, formset.errors)
