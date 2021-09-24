@@ -17,10 +17,14 @@ Album
             {% csrf_token %}
 
             {{ album_form|crispy }}
-
+            <br>
+            <h3>Now add photos and their captions</h3>
+            <br><br>
             {{ formset.management_form }}
             {% for form in formset %}
             {{ form|crispy }}
+            <br>
+            <br>
             {% endfor %}
 
             <input type="submit" name="submit" value="Submit" />

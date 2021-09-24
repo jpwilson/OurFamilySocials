@@ -47,16 +47,27 @@ class Album(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse("album_detail", kwargs={"pk": str(self.pk)})
 
-def upload_gallery_image(instance, filename):
-    return f"/media/{instance.pet.name}/gallery/{filename}"
+
+# def upload_gallery_image(instance, filename):
+#     return f"/media/{instance.album.title}/gallery/{filename}"
 
 
 class Image(models.Model):
-    image = models.ImageField(upload_to=upload_gallery_image)
+    image = models.ImageField(
+        upload_to="pictures/", blank=True
+    )  # upload_gallery_image)
     caption = models.CharField(max_length=400, null=True, blank="")
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name="images")
     locations = models.ManyToManyField(Location, null=True, blank=True)
     pub_date = models.DateTimeField("date published", auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse("image_detail", kwargs={"pk": str(self.pk)})
+
+    def __str__(self):
+        return str(self.caption)
 
     # TODO -22Sept21 - add likes and comments...

@@ -11,4 +11,4 @@ class AlbumForm(forms.ModelForm):
 class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
-        fields = ("image", "caption", "locations")
+        fields = ("image", "caption")  # TODO - add this to 'edit' later, "locations")
