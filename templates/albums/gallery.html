@@ -1,0 +1,40 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+Album
+{% endblock title %}
+
+{% block content %}
+<h1>Album</h1>
+{% if user.is_authenticated %}
+<h2>Hi {{ user.username }} (email: {{ user.email }})</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Album Gallery - {{ album.title }}</h1>
+            <h4>{{ album.descrih4tion }}</p>
+                <p>{{ album.blog }}</p>
+                <br><br>
+
+
+                <!-- PHOTO GALLERY -->
+                <h3>Photos!</h3>
+                <section class="photo_gallery">
+                    {% for gallery_image in album.images.all %}
+                    <a href="{{ gallery_image.image.url }}"><img src="{{ gallery_image.image.url }}" alt=""
+                            title="" /></a>
+                    {% endfor %}
+                </section>
+
+        </div>
+    </div>
+</div>
+<script>
+    var gallery = new SimpleLightbox('.photo_gallery a');
+</script>
+{% else %}
+<p>You are not logged in</p>
+{% endif %}
+{% endblock content %}

@@ -6,3 +6,19 @@ h1 {
   height: 400px;
   width: auto;
 }
+
+.photo_gallery {
+  display: flex;
+}
+
+.photo_gallery a {
+  display: inline-block;
+  height: 300px;
+}
+
+.photo_gallery img {
+  object-position: center;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}

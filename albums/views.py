@@ -19,7 +19,9 @@ def add_album_view(request):
         formset = ImageFormSet(request.POST, request.FILES)
 
         if album_form.is_valid() and formset.is_valid():
-            album_obj = album_form.save()
+            album_obj = album_form.save(commit=False)
+            album_obj.author = request.user
+            album_obj.save()
 
             for form in formset.cleaned_data:
                 if form:
@@ -28,3 +30,8 @@ def add_album_view(request):
             return HttpResponseRedirect("")
         else:
             print(album_form.errors, formset.errors)
+
+
+def album_gallery_view(request, pk):
+    album = Album.objects.get(id=pk)
+    return render(request, "gallery.html", {"album": album})

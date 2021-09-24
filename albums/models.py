@@ -48,12 +48,12 @@ class Album(models.Model):
         return self.title
 
 
-def upload_gallery_image(instance, filename):
-    return f"/media/{instance.pet.name}/gallery/{filename}"
+# def upload_gallery_image(instance, filename):
+#     return f"/media/{instance.album.title}/gallery/{filename}"
 
 
 class Image(models.Model):
-    image = models.ImageField(upload_to=upload_gallery_image)
+    image = models.ImageField(upload_to="pictures/")  # upload_gallery_image)
     caption = models.CharField(max_length=400, null=True, blank="")
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name="images")
     locations = models.ManyToManyField(Location, null=True, blank=True)
