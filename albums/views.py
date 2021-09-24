@@ -1,7 +1,7 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.forms import modelformset_factory
-from .models import Image
+from .models import Image, Album
 from .forms import ImageForm, AlbumForm
 
 
@@ -34,4 +34,4 @@ def add_album_view(request):
 
 def album_gallery_view(request, pk):
     album = Album.objects.get(id=pk)
-    return render(request, "gallery.html", {"album": album})
+    return render(request, "albums/gallery.html", {"album": album})
