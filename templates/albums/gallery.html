@@ -13,7 +13,7 @@ Album
 <div class="container">
     <div class="row">
         <div class="col">
-            <h1>Album Gallery - {{ album.title }}jaja</h1>
+            <h1>Album Gallery - {{ album.title }}</h1>
             <h4>{{ album.description }}</p>
                 <p>{{ album.blog }}</p>
                 <br><br>
@@ -24,7 +24,8 @@ Album
                 <section class="photo_gallery">
                     {% for gallery_image in album.images.all %}
                     <a href="{{ gallery_image.image.url }}"><img src="{{ gallery_image.image.url }}" alt=""
-                            title="" />???</a>
+                            title="" /></a>
+                    <h4>{{ gallery_image.caption }}</h4>
                     {% endfor %}
                 </section>
 

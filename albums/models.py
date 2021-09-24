@@ -67,4 +67,7 @@ class Image(models.Model):
     def get_absolute_url(self):
         return reverse("image_detail", kwargs={"pk": str(self.pk)})
 
+    def __str__(self):
+        return str(self.caption)
+
     # TODO -22Sept21 - add likes and comments...

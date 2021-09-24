@@ -26,7 +26,9 @@ def add_album_view(request):
             for form in formset.cleaned_data:
                 if form:
                     image = form["image"]
-                    Image.objects.create(image=image, album=album_obj)
+                    Image.objects.create(
+                        image=image, album=album_obj, caption=form["caption"]
+                    )
             return HttpResponseRedirect("")
         else:
             print(album_form.errors, formset.errors)
