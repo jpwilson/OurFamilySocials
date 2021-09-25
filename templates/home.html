@@ -8,8 +8,15 @@ Home
 <h1>Homepage</h1>
 {% if user.is_authenticated %}
 <h2>Hi {{ user.username }} (email: {{ user.email }})</h2>
+<h4>Albums</h4>
+<p>Below is a list of your albums, sorted in date order</p>
+{% for album in albums %}
+<ul>
+    <li><a href="">{{ album.title }}</a></li>
+</ul>
+{% endfor %}
 
-<img src="{% static 'images/henki.jpg' %}" alt="" class="intro_img">
+{% comment %} <img src="{% static 'images/henki.jpg' %}" alt="" class="intro_img"> {% endcomment %}
 {% else %}
 <p>You are not logged in</p>
 {% endif %}

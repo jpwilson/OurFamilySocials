@@ -5,6 +5,7 @@ from .models import Image, Album
 from .forms import ImageForm, AlbumForm
 
 
+# TODO NNB! test these views!
 def add_album_view(request):
     ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=10)
 
