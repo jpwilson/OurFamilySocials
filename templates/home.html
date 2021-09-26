@@ -12,7 +12,7 @@ Home
 <p>Below is a list of your albums, sorted in date order</p>
 {% for album in albums %}
 <ul>
-    <li><a href="">{{ album.title }}</a></li>
+    <li><a href="">{{ album.title }}</a> - {{ album.description }}</li>
 </ul>
 {% endfor %}
 
