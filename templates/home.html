@@ -8,13 +8,26 @@ Home
 <h1>Homepage</h1>
 {% if user.is_authenticated %}
 <h2>Hi {{ user.username }} (email: {{ user.email }})</h2>
-<h4>Albums</h4>
-<p>Below is a list of your albums, sorted in date order</p>
-{% for album in albums %}
-<ul>
-    <li><a href="">{{ album.title }}</a> - {{ album.description }}</li>
-</ul>
-{% endfor %}
+<div class="container">
+    <div class="col-md-6">
+        <h4>Your Family's Albums</h4>
+        <p>Below is a list of your albums, sorted in date order</p>
+        {% for album in albums %}
+        <ul>
+            <li><a href="">{{ album.title }}</a> - {{ album.description }}</li>
+        </ul>
+        {% endfor %}
+    </div>
+    <div class="col-md-6">
+        <h4>Your Albums</h4>
+        <p>Below is a list of your albums, sorted in date order</p>
+        {% for album in albums %}
+        <ul>
+            <li><a href="">{{ album.title }}</a> - {{ album.description }}</li>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
 
 {% comment %} <img src="{% static 'images/henki.jpg' %}" alt="" class="intro_img"> {% endcomment %}
 {% else %}

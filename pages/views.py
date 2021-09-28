@@ -1,11 +1,11 @@
-# from ofs.albums.models import Album
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth import get_user_model
 from albums.models import Album
 
 
-class HomePageView(ListView):
+class HomePageView(LoginRequiredMixin, ListView):
     # model = Album  # is shorthand for: queryset = Publisher.objects.all()
     # user = get_user_model()
 
@@ -14,6 +14,7 @@ class HomePageView(ListView):
 
     def get_queryset(self):
         return Album.objects.filter(author=self.request.user)
+
 
 
 class AboutPageView(TemplateView):
