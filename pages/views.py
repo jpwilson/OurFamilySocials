@@ -5,7 +5,6 @@ from django.contrib.auth import get_user_model
 from albums.models import Album
 
 
-# TODO add a homepage for 'not logged in' users...
 class HomePageView(LoginRequiredMixin, ListView):
     # model = Album  # is shorthand for: queryset = Publisher.objects.all()
     # user = get_user_model()
