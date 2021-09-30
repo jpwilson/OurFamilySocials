@@ -15,7 +15,9 @@ Home
             <p>Below is a list of your albums, sorted in date order</p>
             {% for album in albums %}
             <ul>
-                <li><a href="">{{ album.title }}</a> - {{ album.description }}</li>
+                <li><a href="{% url 'view_album' album.id %}">{{ album.title }}</a> - {{ album.description }} -
+                    {{ album.author }}
+                </li>
             </ul>
             {% endfor %}
         </div>
