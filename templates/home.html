@@ -14,7 +14,7 @@ Home
             <h3>Want to share a new memory?</h3>
         </div>
         <div class="col-md-3">
-            <a href="{% url 'add_album' %}" class="btn btn-success">Create</a>
+            <a href="{% url 'albums:add_album' %}" class="btn btn-success">Create</a>
         </div>
         <div class="col-md-3">
             <h4></h4>
@@ -29,7 +29,7 @@ Home
             <p>Below is a list of your albums, sorted in date order</p>
             {% for album in albums %}
             <ul>
-                <li><a href="{% url 'view_album' album.id %}">{{ album.title }}</a> - {{ album.description }} -
+                <li><a href="{% url 'albums:view_album' album.id %}">{{ album.title }}</a> - {{ album.description }} -
                     {{ album.author }}
                 </li>
             </ul>

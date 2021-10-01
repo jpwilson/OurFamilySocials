@@ -30,7 +30,7 @@ def add_album_view(request):
                     Image.objects.create(
                         image=image, album=album_obj, caption=form["caption"]
                     )
-            return HttpResponseRedirect("")
+            return HttpResponseRedirect(reverse("pages:home"))
         else:
             print(album_form.errors, formset.errors)
 
