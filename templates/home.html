@@ -11,6 +11,20 @@ Home
 <div class="container">
     <div class="row">
         <div class="col-md-6">
+            <h3>Want to share a new memory?</h3>
+        </div>
+        <div class="col-md-3">
+            <a href="{% url 'add_album' %}" class="btn btn-success">Create</a>
+        </div>
+        <div class="col-md-3">
+            <h4></h4>
+        </div>
+    </div><br>
+</div><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
             <h4>Your Family's Albums Should be here</h4>
             <p>Below is a list of your albums, sorted in date order</p>
             {% for album in albums %}
