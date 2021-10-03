@@ -6,14 +6,27 @@ Album
 {% endblock title %}
 
 {% block content %}
-<h1>Album</h1>
+<h1>Create an Album</h1>
 {% if user.is_authenticated %}
-<h2>Hi {{ user.username }} (email: {{ user.email }})</h2>
+
 
 <div class="row">
     <div class="col-6 offset-md-3">
         <form id="album_form" method="post" action="." enctype="multipart/form-data">
-
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="submit" name="submit" value="Save" class="btn btn-success" /><br>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{% url 'pages:home' %}" class="btn btn-warning">Cancel</a>
+                    </div>
+                </div><br>
+            </div>
             {% csrf_token %}
 
             {{ album_form|crispy }}
@@ -27,10 +40,25 @@ Album
             <br>
             {% endfor %}
 
-            <input type="submit" name="submit" value="Submit" />
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="submit" name="submit" value="Save" class="btn btn-success" /><br>
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{% url 'pages:home' %}" class="btn btn-warning">Cancel</a>
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                </div>
+            </div>
+
         </form>
     </div>
 </div>
+<br><br>
 {% else %}
 <p>You are not logged in</p>
 {% endif %}

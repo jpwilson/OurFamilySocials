@@ -1,6 +1,7 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.forms import modelformset_factory
+from django.urls import reverse
 from .models import Image, Album
 from .forms import ImageForm, AlbumForm
 
@@ -30,7 +31,9 @@ def add_album_view(request):
                     Image.objects.create(
                         image=image, album=album_obj, caption=form["caption"]
                     )
-            return HttpResponseRedirect("")
+            return HttpResponseRedirect(
+                reverse("albums:view_album", args=(album_obj.id,))
+            )
         else:
             print(album_form.errors, formset.errors)
 
