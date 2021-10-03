@@ -11,7 +11,7 @@ Album
 
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-md-9">
             <h2>{{ album.title }} <a class="btn btn-success" href="#">albums (make this btn work)</a></h2>
             <p>{{ album.description }}</p>
             <p>{{ album.blog }}</p>
@@ -27,6 +27,9 @@ Album
                 {% endfor %}
             </section>
 
+        </div>
+        <div class="col-md-3">
+            <a href="{% url 'albums:edit_album' album.id %}" class="btn btn-warning">Edit</a>
         </div>
     </div>
 </div>
