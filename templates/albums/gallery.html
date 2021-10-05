@@ -29,7 +29,14 @@ Album
 
         </div>
         <div class="col-md-3">
-            <a href="{% url 'albums:edit_album' album.id %}" class="btn btn-warning">Edit</a>
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{% url 'albums:edit_album' album.id %}" class="btn btn-warning">Edit</a>
+                </div>
+                <div class="col-md-6">
+                    <a href="{% url 'albums:delete_album' album.id %}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

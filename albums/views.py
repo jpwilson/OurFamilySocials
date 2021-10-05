@@ -8,6 +8,7 @@ from .forms import ImageForm, AlbumForm
 
 # TODO NNB! test these views!
 # TODO change name from add_album_view to: add_album
+# TODO the 'cancel' button on edit page should go back to album_view, not homepage (list of albums)
 def add_album_view(request):
     ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=10)
 
@@ -69,6 +70,15 @@ def edit_album(request, pk):
             )
         else:
             print(album_form.errors, formset.errors)
+
+
+def delete_album(request, pk):
+    album = Album.objects.get(id=pk)
+    if request.method == "POST":
+        album.delete()
+        return HttpResponseRedirect(reverse("home"))
+
+    return render(request, "albums/delete.html", {"album": album})
 
 
 def album_gallery_view(request, pk):
