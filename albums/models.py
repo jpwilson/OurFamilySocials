@@ -32,11 +32,9 @@ class Album(models.Model):
     # All fields to add in the future
     # TODO 22Sept add a 'last edit date' field
     # TODO 22Sept add a 'django-location-field' field; unrelated, also possibly a 'duration' of album?
-    locations = models.ManyToManyField(Location, null=True, blank=True)
-    tags = models.ManyToManyField(Tag, null=True, blank=True)
-    people = models.ManyToManyField(
-        get_user_model(), related_name="people", null=True, blank=True
-    )
+    locations = models.ManyToManyField(Location, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
+    people = models.ManyToManyField(get_user_model(), related_name="people", blank=True)
     # TODO 22Sept - modify people list in form (see queryset in https://medium.com/swlh/django-forms-for-many-to-many-fields-d977dec4b024)
     # TODO 22Sept: Add a 'comments' section/feature
     # TODO 22Sept: Add a 'likes' section/feature
@@ -61,7 +59,7 @@ class Image(models.Model):
     )  # upload_gallery_image)
     caption = models.CharField(max_length=400, null=True, blank="")
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name="images")
-    locations = models.ManyToManyField(Location, null=True, blank=True)
+    locations = models.ManyToManyField(Location, blank=True)
     pub_date = models.DateTimeField("date published", auto_now_add=True)
 
     def get_absolute_url(self):
