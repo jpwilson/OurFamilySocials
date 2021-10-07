@@ -1,9 +1,15 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.views.generic import ListView
 from django.forms import modelformset_factory, inlineformset_factory
 from django.urls import reverse
 from .models import Image, Album
 from .forms import ImageForm, AlbumForm
+
+
+class AlbumListView(LoginRequiredMixin, ListView):
+    model = Album
 
 
 # TODO NNB! test these views!
