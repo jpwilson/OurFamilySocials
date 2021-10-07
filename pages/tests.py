@@ -1,11 +1,18 @@
 from django.http import response
 from django.test import TestCase, SimpleTestCase
+from django.contrib.auth import get_user_model
 from django.urls import reverse, resolve
 from .views import AboutPageView, HomePageView
 
 # TODO Swith to setUpTestData class for full test setup at class level (for effic) p83 dfp
-class HomePageTests(SimpleTestCase):
+class LoggedInHomePageTests(TestCase):
     def setUp(self):
+        test_user = get_user_model().objects.create_user(  # new
+            username="test_user", email="test_user@email.com", password="testpass123"
+        )
+        test_user.save()
+        # self.client.login(username=test_user.username, password=test_user.password)
+        login = self.client.login(username="test_user", password="testpass123")
         url = reverse("home")
         self.response = self.client.get(url)
 
@@ -24,6 +31,15 @@ class HomePageTests(SimpleTestCase):
     def test_homepage_url_resolves_homepageview(self):  # new
         view = resolve("/")
         self.assertEqual(view.func.__name__, HomePageView.as_view().__name__)
+
+
+class LoggedOutHomePageTests(TestCase):
+    def setUp(self):
+        url = reverse("home")
+        self.response = self.client.get(url)
+
+    def test_homepage_status_code(self):
+        self.assertEqual(self.response.status_code, 302)
 
 
 class AboutPageTests(SimpleTestCase):

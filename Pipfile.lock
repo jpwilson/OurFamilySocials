@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "41b166e0e34e985e00cdb81178cb4bdb7a54b40e4aaa93ac8c804d2b0116abbd"
+            "sha256": "b8f067f2a4627da9b5cd9d8915c26a1939443c0a08b6214cf6aac4a357429848"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -38,6 +38,23 @@
             ],
             "markers": "python_version >= '3'",
             "version": "==2.0.6"
+        },
+        "coverage": {
+            "hashes": [
+                "sha256:462a456a4d793a97d1aa5aeee06185fcb13cb5c5bbb877350ef73234282dad61",
+                "sha256:7867f41c16e1ab997d0a8402d249bbd01bf7444a1eb72149dd64f1c965a9e841",
+                "sha256:7c92782223f4d1d6469734d6c8618de003c80619673c9c810f17ae9496e6e39e",
+                "sha256:7e75f870386878a4f78ba0787253f504d51c3558499f41e73b2c0044cf46aed9",
+                "sha256:848eb026c36a0fc23fba670d776b60d6f8e2af617398600f82b74436a1b280ab",
+                "sha256:921814e8a597e2b89901e2f6eb58fca5527162443b91f7556a87b5309b8e3144",
+                "sha256:b57fea016296574662a08517b1c13eb935c8ed588aa991b108398f0c70347409",
+                "sha256:b5da4cd5d855a337b9b865611c16b4f25dbf169f67d381735f03c46a8e307376",
+                "sha256:df3bf169d4727f3fad146ca715a49a1f72a8258689651ef9de908022e739700d",
+                "sha256:f4017790585d18303efbe7aa863819a7f1d7d13639eae78cab9808c5671d5daa",
+                "sha256:faea05718a8f4206b0e743a5d357144cb91df567373003bed324190c309548b4"
+            ],
+            "index": "pypi",
+            "version": "==3.6"
         },
         "defusedxml": {
             "hashes": [
@@ -238,10 +255,10 @@
         },
         "pytz": {
             "hashes": [
-                "sha256:83a4a90894bf38e243cf052c8b58f381bfe9a7a483f6a9cab140bc7f702ac4da",
-                "sha256:eb10ce3e7736052ed3623d49975ce333bcd712c7bb19a58b9e2089d4057d0798"
+                "sha256:3672058bc3453457b622aab7a1c3bfd5ab0bdae451512f6cf25f64ed37f5b87c",
+                "sha256:acad2d8b20a1af07d4e4c9d2e9285c5ed9104354062f275f3fcd88dcef4f1326"
             ],
-            "version": "==2021.1"
+            "version": "==2021.3"
         },
         "requests": {
             "hashes": [
