@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse, resolve
 from .views import AboutPageView, HomePageView
 
-# TODO Swith to j setUpTestData class for full test setup at class level (for effic) p83 dfp
+# TODO Swith to setUpTestData class for full test setup at class level (for effic) p83 dfp
 class LoggedInHomePageTests(TestCase):
     def setUp(self):
         test_user = get_user_model().objects.create_user(  # new

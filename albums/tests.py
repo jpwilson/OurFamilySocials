@@ -34,10 +34,32 @@ class AddAlbumTests(TestCase):
             album=Album.objects.get(id=1),
         )
 
+    def setUp(self):
+        self.album = Album.objects.get(id=1)
+        self.image = Image.objects.get(id=1)
+        url = reverse("albums:view_album", kwargs={"pk": str(self.album.pk)})
+        self.response = self.client.get(url)
+
     def test_album_info(self):
-        album = Album.objects.get(id=1)
-        self.assertEqual("{}".format(album.title), "My Test Album")
+        # album = Album.objects.get(id=1)
+        self.assertEqual("{}".format(self.album.title), "My Test Album")
 
     def test_image_info(self):
-        image = Image.objects.get(id=1)
-        self.assertEqual("{}".format(image.caption), "Test Image Caption")
+        # image = Image.objects.get(id=1)
+        self.assertEqual("{}".format(self.image.caption), "Test Image Caption")
+
+    def test_album_page_status_code(self):
+        self.assertEqual(self.response.status_code, 200)
+
+    def test_album_page_template_used(self):
+        self.assertTemplateUsed(self.response, "albums/gallery.html")
+
+    def test_album_page_contains_correct_html(self):
+        self.assertContains(self.response, "Album")
+
+    def test_album_page_does_not_contain_incorrect_html(self):
+        self.assertNotContains(self.response, "Hi there! I should not be on the page.")
+
+    def test_album_page_url_resolves_homepageview(self):
+        view = resolve("/albums/{}/".format(str(self.album.pk)))
+        self.assertEqual(view.func.__name__, album_gallery_view.__name__)
