@@ -10,6 +10,11 @@ from .forms import ImageForm, AlbumForm
 
 class AlbumListView(LoginRequiredMixin, ListView):
     model = Album
+    template_name = "albums/album_list.html"
+    context_object_name = "albums"
+
+    def get_queryset(self):
+        return Album.objects.filter(author=self.request.user)
 
 
 # TODO NNB! test these views!
