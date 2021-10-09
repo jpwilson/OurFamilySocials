@@ -24,9 +24,9 @@ Home
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <h4>Your Family's Albums Should be here</h4>
-            <p>Below is a list of your albums, sorted in date order</p>
+            <p>Below will be a list of your albums, sorted in date order</p>
             {% for album in albums %}
             <ul>
                 <li><a href="{% url 'albums:view_album' album.id %}">{{ album.title }}</a> - {{ album.description }} -
@@ -35,14 +35,9 @@ Home
             </ul>
             {% endfor %}
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <h4>Your Albums</h4>
-            <p><a href="{% url 'albums:all_albums' %}">Here</a></p>
-            {% for album in albums %}
-            <ul>
-                <li><a href="">{{ album.title }}</a> - {{ album.description }}</li>
-            </ul>
-            {% endfor %}
+            <p><a href="{% url 'albums:all_albums' %}" class="btn btn-success">Here</a></p>
         </div>
     </div>
 </div>
