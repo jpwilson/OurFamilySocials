@@ -1,11 +1,11 @@
 {% extends '_base.html' %}
 {% load static %}
 {% block title %}
-Home
+My Albums
 {% endblock title %}
 
 {% block content %}
-<h1>Homepage</h1>
+<h1>My own Albums</h1>
 {% if user.is_authenticated %}
 <h2>Hi {{ user.username }} (email: {{ user.email }})</h2><br>
 <div class="container">
@@ -14,7 +14,7 @@ Home
             <h3>Want to share a new memory?</h3>
         </div>
         <div class="col-md-3">
-            <a href="{% url 'albums:add_album' %}" class="btn btn-success">Create an Album</a>
+            <a href="{% url 'albums:add_album' %}" class="btn btn-success">Create</a>
         </div>
         <div class="col-md-3">
             <h4></h4>
@@ -24,9 +24,9 @@ Home
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
-            <h4>Your Family's Albums Should be here</h4>
-            <p>Below will be a list of your albums, sorted in date order</p>
+        <div class="col-md-6">
+            <h4>Your Albums Should be here</h4>
+            <p>Below is a list of your albums</p>
             {% for album in albums %}
             <ul>
                 <li><a href="{% url 'albums:view_album' album.id %}">{{ album.title }}</a> - {{ album.description }} -
@@ -35,9 +35,8 @@ Home
             </ul>
             {% endfor %}
         </div>
-        <div class="col-md-4">
-            <h4>Your Albums</h4>
-            <p><a href="{% url 'albums:all_albums' %}" class="btn btn-success">Here</a></p>
+        <div class="col-md-6">
+
         </div>
     </div>
 </div>

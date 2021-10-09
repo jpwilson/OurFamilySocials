@@ -1,9 +1,16 @@
 from django.urls import path
-from .views import add_album_view, album_gallery_view, edit_album, delete_album
+from .views import (
+    add_album_view,
+    album_gallery_view,
+    edit_album,
+    delete_album,
+    AlbumListView,
+)
 
 app_name = "albums"
 urlpatterns = [
     # path("add/", add_album_view, name="add_album"),
+    path("all", AlbumListView.as_view(), name="all_albums"),
     path("add/", add_album_view, name="add_album"),
     path("edit/<int:pk>/", edit_album, name="edit_album"),
     path("delete/<int:pk>/", delete_album, name="delete_album"),
