@@ -9,7 +9,6 @@ from .forms import ImageForm, AlbumForm
 
 
 class AlbumListView(LoginRequiredMixin, ListView):
-    model = Album
     template_name = "albums/album_list.html"
     context_object_name = "albums"
 
