@@ -5,6 +5,9 @@ from django.utils import timezone
 from django.contrib.auth import get_user_model
 
 
+# TODO - when we create a new user, we need to create a FamilyList
+
+
 class FamilyList(models.Model):
 
     user = models.OneToOneField(
@@ -75,7 +78,6 @@ class RelativeRequest(models.Model):
         return self.sender.username
 
     def accept(self):
-        sender_family_list = FamilyList.objects.get(user=self.sender)
 
         receiver_family_list = FamilyList.objects.get(user=self.receiver)
 
@@ -83,9 +85,21 @@ class RelativeRequest(models.Model):
             if self.sender not in receiver_family_list:
                 receiver_family_list.add_relative(self.sender)
 
-        if sender_family_list:
-            if self.receiver not in sender_family_list:
-                sender_family_list.add_relative(self.receiver)
+                sender_family_list = FamilyList.objects.get(user=self.sender)
+                if sender_family_list:
+                    if self.receiver not in sender_family_list:
+                        sender_family_list.add_relative(self.receiver)
+                        self.is_active = False
+                        self.save()
 
     def decline(self):
         self.is_active = False
+        self.save = False
+
+    def cancel(self):
+        """
+        Functionality same as 'decline', but
+        the difference will come with the notification...
+        """
+        self.is_active = False
+        self.save = False
