@@ -33,6 +33,7 @@ class FamilyList(models.Model):
 
     def un_relate(self, removee):
         """
+        'Unfried' someone
         Dont confuse the two users (FriendList.user and removee's list.user , with the two lists (self , and removee's )
         This takes into account the remover (initiates this) and the removee
         That is, 'remove_relative' has to be called on both parties
@@ -43,3 +44,48 @@ class FamilyList(models.Model):
 
         removee_relative_list = FamilyList.objects.get(user=removee)
         removee_relative_list.remove_relative(self.user)
+
+    def is_relative(self, relative):
+        """
+        Check if user and relative are linked relatives...
+        """
+        return relative in self.relatives.all()
+
+
+class RelativeRequest(models.Model):
+    """
+    Relative requests - sender & receiver (initiator and receiver)
+    """
+
+    # send req, accept req, unsend, unaccept
+
+    sender = models.ForeignKey(
+        get_user_model, on_delete=models.CASCADE, related_name="sender"
+    )
+
+    receiver = models.ForeignKey(
+        get_user_model, on_delete=models.CASCADE, related_name="receiver"
+    )
+
+    is_active = models.BooleanField(default=True, null=False, blank=True)
+
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.sender.username
+
+    def accept(self):
+        sender_family_list = FamilyList.objects.get(user=self.sender)
+
+        receiver_family_list = FamilyList.objects.get(user=self.receiver)
+
+        if receiver_family_list:
+            if self.sender not in receiver_family_list:
+                receiver_family_list.add_relative(self.sender)
+
+        if sender_family_list:
+            if self.receiver not in sender_family_list:
+                sender_family_list.add_relative(self.receiver)
+
+    def decline(self):
+        self.is_active = False
