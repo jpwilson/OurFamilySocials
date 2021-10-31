@@ -5,16 +5,16 @@ from django.utils import timezone
 from django.contrib.auth import get_user_model
 
 
-# TODO - when we create a new user, we need to create a FamilyList
+# TODO - when we create a new user, we need to create a RelativeList
 
 
-class FamilyList(models.Model):
+class RelativeList(models.Model):
 
     user = models.OneToOneField(
-        get_user_model, on_delete=models.CASCADE, related_name="user"
+        get_user_model(), on_delete=models.CASCADE, related_name="user"
     )
     relatives = models.ManyToManyField(
-        get_user_model, blank=True, related_name="relatives"
+        get_user_model(), blank=True, related_name="relatives"
     )
 
     def __str__(self) -> str:
@@ -45,7 +45,7 @@ class FamilyList(models.Model):
 
         remover_relative_list.remove_relative(removee)
 
-        removee_relative_list = FamilyList.objects.get(user=removee)
+        removee_relative_list = RelativeList.objects.get(user=removee)
         removee_relative_list.remove_relative(self.user)
 
     def is_relative(self, relative):
@@ -63,11 +63,11 @@ class RelativeRequest(models.Model):
     # send req, accept req, unsend, unaccept
 
     sender = models.ForeignKey(
-        get_user_model, on_delete=models.CASCADE, related_name="sender"
+        get_user_model(), on_delete=models.CASCADE, related_name="sender"
     )
 
     receiver = models.ForeignKey(
-        get_user_model, on_delete=models.CASCADE, related_name="receiver"
+        get_user_model(), on_delete=models.CASCADE, related_name="receiver"
     )
 
     is_active = models.BooleanField(default=True, null=False, blank=True)
@@ -79,13 +79,13 @@ class RelativeRequest(models.Model):
 
     def accept(self):
 
-        receiver_family_list = FamilyList.objects.get(user=self.receiver)
+        receiver_family_list = RelativeList.objects.get(user=self.receiver)
 
         if receiver_family_list:
             if self.sender not in receiver_family_list:
                 receiver_family_list.add_relative(self.sender)
 
-                sender_family_list = FamilyList.objects.get(user=self.sender)
+                sender_family_list = RelativeList.objects.get(user=self.sender)
                 if sender_family_list:
                     if self.receiver not in sender_family_list:
                         sender_family_list.add_relative(self.receiver)
