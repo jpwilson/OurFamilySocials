@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext as _
+from family.models import RelativeList
 
 
 class CustomUser(AbstractUser):
@@ -19,5 +20,8 @@ class CustomUser(AbstractUser):
         default=REFUSE,
     )
 
-
-# 17
+    def save(self, *args, **kwargs):
+        created = not self.pk
+        super().save(*args, **kwargs)
+        if created:
+            RelativeList.objects.create(user=self)
