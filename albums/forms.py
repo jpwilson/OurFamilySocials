@@ -9,6 +9,10 @@ class AlbumForm(forms.ModelForm):
 
 
 class ImageForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ImageForm, self).__init__(*args, **kwargs)
+        self.fields["caption"].required = True
+
     class Meta:
         model = Image
         fields = ("image", "caption")  # TODO - add this to 'edit' later, "locations")

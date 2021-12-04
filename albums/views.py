@@ -47,7 +47,17 @@ def add_album_view(request):
                 reverse("albums:view_album", args=(album_obj.id,))
             )
         else:
-            print(album_form.errors, formset.errors)
+            # print("Out errors are: ", album_form.errors, formset.errors)
+            return render(
+                request,
+                "albums/index.html",
+                {
+                    "album_form": album_form,
+                    "formset": formset,
+                    "album_errors": album_form.errors,
+                    "form_errors": formset.errors,
+                },
+            )
 
 
 def edit_album(request, pk):
@@ -65,6 +75,7 @@ def edit_album(request, pk):
         formset = ImageFormSet(request.POST, request.FILES)
 
         if album_form.is_valid() and formset.is_valid():
+            print("Things are VALIDIO!!!")
             album_obj = album_form.save(commit=False)
             album_obj.author = request.user
             album_obj.save()
