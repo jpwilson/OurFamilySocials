@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Profile{% endblock title %}
+{% block content %}
+<h2>Profile - {{user.username}}</h2>
+<h3>Your recent albums:</h3>
+<ul>
+    {% for album in your_recent_albums %}
+    <li>{{album.title}} -- {{album.author}} -- Published: {{ album.pub_date }}</li>
+    {% endfor %}
+</ul>
+<h3>All albums:</h3>
+<ul>
+    {% for albume in all_albums %}
+    <li>{{albume.title}} -- {{albume.author}} -- Published: {{albume.pub_date }}</li>
+    {% endfor %}
+</ul>
+{% endblock content %}

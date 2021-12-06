@@ -2,6 +2,14 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 
+class Profile(models.Model):
+    user = models.OneToOneField(get_user_model(), null=True, on_delete=models.CASCADE)
+    bio = models.CharField(max_length=400, null=True, blank="")
+
+    def __str__(self):
+        return str(self.name)
+
+
 class Location(models.Model):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=200, null=True, blank="")
