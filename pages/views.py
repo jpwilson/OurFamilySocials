@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib.auth import get_user_model
 from albums.models import Album
 
@@ -18,3 +18,8 @@ class HomePageView(LoginRequiredMixin, ListView):
 
 class AboutPageView(TemplateView):
     template_name = "about.html"
+
+
+class ProfileView(DetailView):
+    model = get_user_model()
+    template_name = "account/profile.html"
