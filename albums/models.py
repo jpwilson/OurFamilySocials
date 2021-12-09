@@ -6,6 +6,31 @@ class Profile(models.Model):
     user = models.OneToOneField(get_user_model(), null=True, on_delete=models.CASCADE)
     bio = models.CharField(max_length=400, null=True, blank="")
 
+        """
+    MALE = "male"
+    FEMALE = "female"
+    REFUSE = "refuse"
+    GENDER = [
+        (MALE, _("Male")),
+        (FEMALE, _("Female")),
+        (REFUSE, _("Choose not to say")),
+    ]
+    gender = models.CharField(
+        max_length=32,
+        choices=GENDER,
+        default=REFUSE,
+    )
+    def save(self, *args, **kwargs):
+        created = not self.pk
+        super().save(*args, **kwargs)
+        if created:
+            RelativeList.objects.create(user=self)
+
+"""
+
+
+
+
     def __str__(self):
         return str(self.name)
 
