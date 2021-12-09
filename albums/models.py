@@ -6,7 +6,7 @@ class Profile(models.Model):
     user = models.OneToOneField(get_user_model(), null=True, on_delete=models.CASCADE)
     bio = models.CharField(max_length=400, null=True, blank="")
 
-        """
+    """
     MALE = "male"
     FEMALE = "female"
     REFUSE = "refuse"
@@ -26,10 +26,7 @@ class Profile(models.Model):
         if created:
             RelativeList.objects.create(user=self)
 
-"""
-
-
-
+    """
 
     def __str__(self):
         return str(self.name)
