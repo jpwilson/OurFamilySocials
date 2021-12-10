@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -5,6 +7,12 @@ from django.contrib.auth import get_user_model
 class Profile(models.Model):
     user = models.OneToOneField(get_user_model(), null=True, on_delete=models.CASCADE)
     bio = models.CharField(max_length=400, null=True, blank="")
+
+    pub_date = models.DateTimeField("date published", auto_now_add=True)
+
+    @property
+    def member_duration(self):
+        return timezone.now() - self.pub_date
 
     """
     MALE = "male"
