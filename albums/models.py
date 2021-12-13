@@ -2,6 +2,7 @@ from django.utils import timezone
 
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.db.models.signals import post_save
 
 
 class Profile(models.Model):
@@ -38,6 +39,24 @@ class Profile(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+        print("We have created a profile via a post save signal")
+
+
+post_save.connect(create_profile, sender=get_user_model())
+
+
+def update_profile(sender, instance, created, **kwargs):
+    if not created:
+        instance.profile.save()
+        print("We have now updated a profile via a signal")
+
+
+post_save.connect(update_profile, sender=get_user_model())
 
 
 class Location(models.Model):
