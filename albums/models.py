@@ -38,12 +38,14 @@ class Profile(models.Model):
     """
 
     def __str__(self):
-        return str(self.name)
+        return str(self.user.username)
 
 
 def create_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
+        Profile.objects.create(
+            user=instance, bio="this is bio of {}".format(instance.username)
+        )
         print("We have created a profile via a post save signal")
 
 
