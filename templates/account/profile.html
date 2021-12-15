@@ -5,9 +5,14 @@
 <h2>Profile - {{user.username}}</h2>
 <h3>Your recent albums:</h3>
 <ul>
+
     {% for album in your_recent_albums %}
     <li>{{album.title}} -- {{album.author}} -- Published: {{ album.pub_date }}</li>
+    {% empty %}
+    <h5 class="inform">You currently have no albums. Make one any time.</h5>
+    <a href="{% url 'albums:add_album' %}" class="btn btn-success">Create an Album</a>
     {% endfor %}
+
 </ul>
 <h3>All albums:</h3>
 <ul>
